@@ -1,0 +1,9 @@
+<button (click)="addProject()">Add Data</button>
+<ul>
+    <li *ngFor="let project of projects">
+        <p>{{ project.data.title }}</p>
+        <p>{{ project.data.description }}</p>
+        <button (click)="updateProject(project.id)">Edit</button>
+        <button (click)="deleteProject(project.id)">Delete</button>
+    </li>
+</ul>
