@@ -18,6 +18,14 @@ export class ProjectService {
     }
 
     public getProjects() {
-        return this.projectsCollection.valueChanges();
+        return this.projectsCollection.snapshotChanges();
+    }
+
+    public updateProject(projectId: string, updatedProject: Project) {
+        this.db.doc('projects/' + projectId).update(updatedProject);
+    }
+
+    public deleteProject(projectId: string) {
+        this.db.doc('projects/' + projectId).delete();
     }
 }
