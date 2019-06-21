@@ -1,0 +1,12 @@
+.project {
+    display: flex;
+    flex:1 0 auto;
+    .card {
+        .project-logo {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            object-position: center;
+        }
+    }
+}

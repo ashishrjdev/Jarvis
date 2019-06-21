@@ -1,1 +1,50 @@
 /* You can add global styles to this file, and also import other style files */
+$bg-color: #fafafa;
+$btn-primary-color: #02c1a6;
+$btn-primary-dark-color: #03ad95;
+@font-face {
+    font-family: 'SourceSansPro';
+    font-weight: normal;
+    src: url(assets/fonts/SourceSansPro-Regular.ttf);
+}
+@font-face {
+    font-family: 'SourceSansPro';
+    font-weight: bold;
+    src: url(assets/fonts/SourceSansPro-Bold.ttf);
+}
+@font-face {
+    font-family: 'SourceSansPro';
+    font-weight: 600;
+    src: url(assets/fonts/SourceSansPro-Semibold.ttf);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'SourceSansPro', sans-serif;
+}
+
+body {
+    background-color: $bg-color;
+}
+
+.btn-primary, .btn-primary:hover {
+    background-color: $btn-primary-color;
+    border-color: $btn-primary-color;
+    &:hover {
+        background-color: $btn-primary-dark-color;
+        border-color: $btn-primary-dark-color;
+    }
+    &:active {
+        background-color: $btn-primary-dark-color !important;
+        border-color: $btn-primary-dark-color !important;
+    }
+    &:focus {
+        box-shadow: none;
+    }
+}
+
+.font-smbold {
+    font-weight: 600;
+}

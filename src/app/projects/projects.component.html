@@ -1,4 +1,4 @@
-<button (click)="addProject()">Add Data</button>
+<!-- <button (click)="addProject()">Add Data</button>
 <ul>
     <li *ngFor="let project of projects">
         <p>{{ project.data.title }}</p>
@@ -6,4 +6,74 @@
         <button (click)="updateProject(project.id)">Edit</button>
         <button (click)="deleteProject(project.id)">Delete</button>
     </li>
-</ul>
+</ul> -->
+<main class="container">
+    <section class="mt-5 row mx-0">
+        <!-- <div class="col-md-4 project">
+            <div class="card w-100 h-100 border-0 shadow-sm">
+                <div class="card-body">
+                    <img class="project-logo mb-2" src="assets/images/project_icon.png" alt="P">
+                    <h5 class="card-title project-title font-smbold">Jarvis - Project Assistant</h5>
+                    <p class="card-text project-desc">This is a longer card with supporting text below as a natural
+                        lead-in to
+                        additional content. This content is a little bit longer.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 project">
+            <div class="card w-100 h-100 border-0 shadow-sm">
+                <div class="card-body">
+                    <img class="project-logo mb-2" src="assets/images/project_icon.png" alt="P">
+                    <h5 class="card-title project-title">Todo App - Flutter</h5>
+                    <p class="card-text project-desc">A simple todo app in flutter with Google calendar integration.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 project">
+            <div class="card w-100 h-100 border-0 shadow-sm">
+                <div class="card-body">
+                    <img class="project-logo mb-2" src="assets/images/project_icon.png" alt="P">
+                    <h5 class="card-title project-title">Jarvis - Project Assistant</h5>
+                    <p class="card-text project-desc"></p>
+                </div>
+            </div>
+        </div> -->
+        <div class="no-projects w-100 text-center py-5">
+            <img src="assets/images/project_icon.png" class="mb-4" alt="">
+            <h5 class="text-muted mb-3">It seems you have no projects :(</h5>
+            <button class="btn btn-primary" data-toggle="modal" data-target="#newproject">New Project</button>
+        </div>
+        <div class="modal fade" id="newproject" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content p-3">
+                    <form action="">
+                        <div class="modal-header">
+                            <div class="text-center">
+                                <h5 class="modal-title font-smbold">Create New Project</h5>
+                            </div>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body py-3">
+                            <div class="form-group">
+                                <label for="projecttitle">Project Title</label>
+                                <input type="text" class="form-control" id="projecttitle"
+                                    placeholder="Your awesome project name">
+                            </div>
+                            <div class="form-group">
+                                <label for="projectdesc">Project Description</label>
+                                <textarea class="form-control" id="projectdesc"
+                                    placeholder="Tell us something about the project in detail"></textarea>
+                            </div>
+                        </div>
+                        <div class="modal-footer border-0">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Create Project</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
