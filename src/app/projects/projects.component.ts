@@ -64,9 +64,13 @@ export class ProjectsComponent implements OnInit {
         } else {
             this.addProject(formData.projecttitle, formData.projectdesc);
         }
+        this.resetDefaults();
+        form.reset();
+    }
+
+    public resetDefaults() {
         this.isEditing = false;
         this.selectedPid = "";
         this.selectedProject = new Project();
-        form.reset();
     }
 }

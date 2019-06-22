@@ -1,6 +1,37 @@
+.page-title {
+    border-bottom: 3px solid #02c1a6;
+    display: inline-block;
+}
+
+.search {
+    .input-group-prepend {
+        height: 38px;
+        .input-group-text {
+            background-color: white;
+            .material-icons {
+                font-size: 18px;
+            }
+        }
+    }
+    input {
+        &:focus {
+            box-shadow: none !important;
+            border-color: #ced4da;
+        }
+    }
+}
+
+.add-project {
+    .material-icons {
+        font-size: 18px;
+        font-weight: 600;
+    }
+}
+
 .project {
     display: flex;
     flex:1 0 auto;
+    margin-bottom: 30px;
     .card {
         .project-logo {
             width: 70px;
@@ -19,6 +50,7 @@
         button.close {
             &:focus {
                 box-shadow: none;
+                outline: none;
             } 
         }
     }
@@ -43,5 +75,20 @@
     }
     .material-icons {
         color: #909090;
+        font-size: 18px;
+    }
+}
+
+@media screen and (max-width: 1023px) {
+    .add-project {
+        span {
+            display: none;
+        }
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .page-header-right {
+        justify-content: start !important;
     }
 }

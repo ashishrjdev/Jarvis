@@ -1,5 +1,23 @@
 <main class="container">
-    <section class="mt-5 row mx-0">
+    <section class="mt-5 row mx-0 d-flex align-items-center">
+        <div class="col-md-6">
+            <h5 class="page-title p-1 font-smbold">Projects</h5>
+        </div>
+        <div class="col-md-6">
+            <div class="d-flex justify-content-end page-header-right">
+                <div class="input-group mb-0 w-auto search flex-fill">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text pr-0"><i
+                            class="material-icons">search</i></span>
+                    </div>
+                    <input type="text" class="form-control border-left-0" placeholder="Search projects">
+                </div>
+                <button class="btn btn-primary ml-4 d-flex align-items-center add-project" data-toggle="modal" data-target="#newproject"><i
+                    class="material-icons">add</i><span>New Project</span></button>
+            </div>
+        </div>
+    </section>
+    <section class="mt-4 row mx-0">
         <!-- Projects -->
         <div class="col-md-4 project" *ngFor="let project of projects">
             <div class="card w-100 h-100 border-0 shadow-sm">
@@ -27,7 +45,8 @@
         <div *ngIf="projects?.length == 0" class="no-projects w-100 text-center py-5">
             <img src="assets/images/project_icon.png" class="mb-4" alt="">
             <h5 class="text-muted mb-3">Hmmm! It seems you have no projects :(</h5>
-            <button class="btn btn-primary" data-toggle="modal" data-target="#newproject">New Project</button>
+            <button class="btn btn-primary d-flex align-items-center add-project" data-toggle="modal" data-target="#newproject"><i
+                class="material-icons">add</i>New Project</button>
         </div>
         <!-- Loader -->
         <div *ngIf="!isdataLoaded">
@@ -43,7 +62,7 @@
                                 <h5 *ngIf="isEditing" class="modal-title font-smbold mb-1">Update Project</h5>
                                 <h5 *ngIf="!isEditing" class="modal-title font-smbold mb-1">Create New Project</h5>
                             </div>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <button type="button" class="close" (click)="resetDefaults()" onclick="$('.modal').modal('hide');" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
