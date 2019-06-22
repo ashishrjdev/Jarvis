@@ -73,4 +73,10 @@ export class ProjectsComponent implements OnInit {
         this.selectedPid = "";
         this.selectedProject = new Project();
     }
+
+    public onDelete(form: HTMLFormElement) {
+        this.deleteProject(this.selectedPid);
+        this.resetDefaults();
+        form.reset();
+    }
 }

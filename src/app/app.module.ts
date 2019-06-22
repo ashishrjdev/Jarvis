@@ -11,12 +11,14 @@ import { ProjectsComponent } from './projects/projects.component';
 import { ProjectdetailsComponent } from './projectdetails/projectdetails.component';
 import { environment } from '../environments/environment';
 import { AngularFirestore } from 'angularfire2/firestore';
+import { EqualValidator } from './shared/directives/equal-validator.directive';
 
 @NgModule({
     declarations: [
         AppComponent,
         ProjectsComponent,
-        ProjectdetailsComponent
+        ProjectdetailsComponent,
+        EqualValidator
     ],
     imports: [
         BrowserModule,

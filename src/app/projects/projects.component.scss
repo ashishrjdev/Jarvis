@@ -42,9 +42,9 @@
     }
 }
 
-#newproject {
+#newproject, #delproject {
     .modal-header {
-        div.text-center {
+        .modal-title {
             border-bottom: 2px solid #02c1a6;
         }
         button.close {
