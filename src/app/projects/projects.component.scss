@@ -10,3 +10,21 @@
         }
     }
 }
+
+#newproject {
+    .modal-header {
+        button.close {
+            &:focus {
+                box-shadow: none;
+            } 
+        }
+    }
+}
+
+.loader {
+    width: 75px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}

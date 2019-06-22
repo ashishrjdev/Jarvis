@@ -43,6 +43,10 @@ body {
     &:focus {
         box-shadow: none;
     }
+    &:disabled {
+        background-color: $btn-primary-dark-color;
+        border-color: $btn-primary-dark-color;
+    }
 }
 
 .font-smbold {
