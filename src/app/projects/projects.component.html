@@ -10,7 +10,7 @@
                     <div class="input-group-prepend">
                         <span class="input-group-text pr-0"><i class="material-icons">search</i></span>
                     </div>
-                    <input type="text" class="form-control border-left-0" placeholder="Search projects" />
+                    <input type="text" class="form-control border-left-0" [(ngModel)]="searchText" placeholder="Search projects" />
                 </div>
                 <button 
                     class="btn btn-primary ml-4 d-flex align-items-center add-project"
@@ -24,7 +24,7 @@
     <!-- Main Section -->
     <section class="mt-4 row mx-0">
         <!-- Projects -->
-        <div class="col-md-4 project" *ngFor="let project of projects">
+        <div class="col-md-4 project" *ngFor="let project of projects | filter: searchText">
             <div class="card w-100 h-100 border-0 shadow-sm">
                 <div class="card-body">
                     <img class="project-logo mb-2" src="assets/images/project_icon.png" alt="P" />

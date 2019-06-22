@@ -1,5 +1,5 @@
 import { ProjectService } from './../shared/services/project.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChildren } from '@angular/core';
 import { Project } from '../shared/models/project.model';
 
 @Component({
@@ -13,6 +13,8 @@ export class ProjectsComponent implements OnInit {
     isEditing: boolean = false;
     selectedProject: Project = new Project();
     selectedPid: string;
+    searchText: string = "";
+
     constructor(private projectService: ProjectService) {}
 
     ngOnInit() {
