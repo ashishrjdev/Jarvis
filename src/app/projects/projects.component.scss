@@ -13,6 +13,9 @@
 
 #newproject {
     .modal-header {
+        div.text-center {
+            border-bottom: 2px solid #02c1a6;
+        }
         button.close {
             &:focus {
                 box-shadow: none;
@@ -27,4 +30,18 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+}
+
+.project-settings {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    .dropdown-toggle {
+        &::after {
+            display: none;
+        }
+    }
+    .material-icons {
+        color: #909090;
+    }
 }

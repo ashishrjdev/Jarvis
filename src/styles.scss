@@ -29,7 +29,7 @@ body {
     background-color: $bg-color;
 }
 
-.btn-primary, .btn-primary:hover {
+.btn-primary{
     background-color: $btn-primary-color;
     border-color: $btn-primary-color;
     &:hover {
@@ -39,6 +39,9 @@ body {
     &:active {
         background-color: $btn-primary-dark-color !important;
         border-color: $btn-primary-dark-color !important;
+        .material-icons {
+            color: white;
+        }
     }
     &:focus {
         box-shadow: none;
@@ -48,6 +51,20 @@ body {
         border-color: $btn-primary-dark-color;
     }
 }
+
+.dropdown-item {
+    &:active {
+        background-color: $btn-primary-dark-color !important;
+        border-color: $btn-primary-dark-color !important;
+        .material-icons {
+            color: white !important;
+        }
+    }
+    &:focus {
+        box-shadow: none;
+        outline: none;
+    }
+} 
 
 .font-smbold {
     font-weight: 600;

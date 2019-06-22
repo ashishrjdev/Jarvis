@@ -1,29 +1,47 @@
 <main class="container">
     <section class="mt-5 row mx-0">
+        <!-- Projects -->
         <div class="col-md-4 project" *ngFor="let project of projects">
             <div class="card w-100 h-100 border-0 shadow-sm">
                 <div class="card-body">
                     <img class="project-logo mb-2" src="assets/images/project_icon.png" alt="P">
                     <h5 class="card-title project-title font-smbold">{{ project.data.name }}</h5>
                     <p class="card-text project-desc">{{ project.data.description }}</p>
+                    <div class="dropdown project-settings">
+                        <button class="btn dropdown-toggle d-flex align-items-center justify-content-center shadow-sm"
+                            type="button" data-toggle="dropdown">
+                            <i class="material-icons">settings</i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right border-0 shadow-lg mt-2 px-1">
+                            <button class="dropdown-item d-flex align-items-center py-2 rounded" type="button"
+                                data-toggle="modal" data-target="#newproject" (click)="setProject(project)"><i
+                                    class="material-icons">edit</i>&nbsp;&nbsp;Edit</button>
+                            <button class="dropdown-item d-flex align-items-center py-2 rounded" type="button"><i
+                                    class="material-icons">delete</i>&nbsp;&nbsp;Delete</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+        <!-- No projects message -->
         <div *ngIf="projects?.length == 0" class="no-projects w-100 text-center py-5">
             <img src="assets/images/project_icon.png" class="mb-4" alt="">
             <h5 class="text-muted mb-3">Hmmm! It seems you have no projects :(</h5>
             <button class="btn btn-primary" data-toggle="modal" data-target="#newproject">New Project</button>
         </div>
+        <!-- Loader -->
         <div *ngIf="!isdataLoaded">
             <img class="loader" src="assets/images/loader.svg" alt="">
         </div>
+        <!-- Add Update Project Modal -->
         <div class="modal fade" id="newproject" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content p-3">
                     <form name="form" (ngSubmit)="cpform.form.valid && onSubmit(cpform)" #cpform="ngForm">
-                        <div class="modal-header">
+                        <div class="modal-header border-0">
                             <div class="text-center">
-                                <h5 class="modal-title font-smbold">Create New Project</h5>
+                                <h5 *ngIf="isEditing" class="modal-title font-smbold mb-1">Update Project</h5>
+                                <h5 *ngIf="!isEditing" class="modal-title font-smbold mb-1">Create New Project</h5>
                             </div>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
@@ -33,8 +51,8 @@
                             <div class="form-group">
                                 <label for="projecttitle" class="font-smbold">Project Title</label>
                                 <input type="text" class="form-control" id="projecttitle"
-                                    placeholder="Your awesome project name" required ngModel #projecttitle="ngModel"
-                                    name="projecttitle" [ngClass]="{'is-invalid': projecttitle.touched && !projecttitle.valid,
+                                    placeholder="Your awesome project name" required [(ngModel)]="selectedProject.name"
+                                    #projecttitle="ngModel" name="projecttitle" [ngClass]="{'is-invalid': projecttitle.touched && !projecttitle.valid,
                                     'is-valid': projecttitle.touched && projecttitle.valid}">
                                 <div *ngIf="projecttitle.touched && projecttitle.valid" class="valid-feedback">Nice!
                                 </div>
@@ -44,8 +62,9 @@
                             <div class="form-group">
                                 <label for="projectdesc" class="font-smbold">Project Description</label>
                                 <textarea class="form-control" id="projectdesc" rows="5"
-                                    placeholder="Tell us something about the project in detail" required ngModel
-                                    #projectdesc="ngModel" name="projectdesc" [ngClass]="{'is-invalid': projectdesc.touched && !projectdesc.valid,
+                                    placeholder="Tell us something about the project in detail" required
+                                    [(ngModel)]="selectedProject.description" #projectdesc="ngModel" name="projectdesc"
+                                    [ngClass]="{'is-invalid': projectdesc.touched && !projectdesc.valid,
                                     'is-valid': projectdesc.touched && projectdesc.valid}"></textarea>
                                 <div *ngIf="projectdesc.touched && projectdesc.valid" class="valid-feedback">Looks Good!
                                 </div>
@@ -54,7 +73,9 @@
                             </div>
                         </div>
                         <div class="modal-footer border-0">
-                            <button type="submit" class="btn btn-primary" [disabled]="!cpform.valid"
+                            <button *ngIf="isEditing" type="submit" class="btn btn-primary" [disabled]="!cpform.valid"
+                                onclick="$('.modal').modal('hide');">Update Project</button>
+                            <button *ngIf="!isEditing" type="submit" class="btn btn-primary" [disabled]="!cpform.valid"
                                 onclick="$('.modal').modal('hide');">Create Project</button>
                         </div>
                     </form>
