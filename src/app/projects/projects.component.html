@@ -24,7 +24,8 @@
     <!-- Main Section -->
     <section class="mt-4 row mx-0">
         <!-- Projects -->
-        <div class="col-md-4 project" *ngFor="let project of projects | filter: searchText">
+        <ng-container *ngIf="(projects | filter: searchText ) as fprojects">
+        <div class="col-md-4 project" *ngFor="let project of fprojects">
             <div class="card w-100 h-100 border-0 shadow-sm">
                 <div class="card-body">
                     <img class="project-logo mb-2" src="assets/images/project_icon.png" alt="P" />
@@ -61,6 +62,13 @@
                 </div>
             </div>
         </div>
+        <div 
+            *ngIf="isdataLoaded && projects?.length > 0 && fprojects?.length == 0"
+            class="col-md-12 empty-result w-100 text-center py-5">
+            <img src="assets/images/project_icon.png" class="mb-4" alt="" />
+            <h5 class="text-muted mb-3">No projects found :(</h5>
+        </div>
+        </ng-container>
         <!-- No projects message -->
         <div *ngIf="projects?.length == 0" class="no-projects w-100 text-center py-5">
             <img src="assets/images/project_icon.png" class="mb-4" alt="" />
