@@ -16,7 +16,7 @@
                     class="btn btn-primary ml-4 d-flex align-items-center add-project"
                     data-toggle="modal"
                     data-target="#newproject">
-                    <i class="material-icons">add</i><span>New Project</span>
+                    <i class="material-icons font-smbold">add</i><span>New Project</span>
                 </button>
             </div>
         </div>
@@ -33,6 +33,11 @@
                         {{ project.data.name }}
                     </h5>
                     <p class="card-text project-desc">{{ project.data.description }}</p>
+                    <button 
+                        class="btn btn-primary d-flex align-items-center dashboard-btn"
+                        [routerLink]="['/project', project.id]">
+                        <i class="material-icons text-white mr-1">dashboard</i>Dashboard
+                    </button>
                     <div class="dropdown project-settings">
                         <button
                             class="btn dropdown-toggle d-flex align-items-center justify-content-center shadow-sm"
@@ -247,3 +252,4 @@
         </div>
     </section>
 </main>
+<router-outlet></router-outlet>

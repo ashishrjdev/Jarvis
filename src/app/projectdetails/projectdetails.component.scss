@@ -1,0 +1,36 @@
+.nav-tabs {
+    border: none;
+    .nav-item {
+        .nav-link {
+            color: black;
+            background: white;
+            border: none;
+            border-bottom: 2px solid white;
+            &.active {
+                color: black;
+                background: white;
+                border-bottom: 2px solid #02c1a6;
+            }
+        }
+        &:first-child {
+            border-top-left-radius: 10px;
+        }
+        &:last-child {
+            border-top-right-radius: 10px;
+        }
+    }
+}
+
+.tab-content {
+    min-height: 70vh;
+    background-color: white;
+    .no-data {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        img {
+            width: 200px;
+        }
+    }
+}

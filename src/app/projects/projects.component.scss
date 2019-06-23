@@ -1,6 +1,13 @@
-.page-title {
-    border-bottom: 3px solid #02c1a6;
-    display: inline-block;
+.loader {
+    width: 75px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.material-icons {
+    font-size: 18px;
 }
 
 .search {
@@ -8,9 +15,6 @@
         height: 38px;
         .input-group-text {
             background-color: white;
-            .material-icons {
-                font-size: 18px;
-            }
         }
     }
     input {
@@ -18,13 +22,6 @@
             box-shadow: none !important;
             border-color: #ced4da;
         }
-    }
-}
-
-.add-project {
-    .material-icons {
-        font-size: 18px;
-        font-weight: 600;
     }
 }
 
@@ -56,14 +53,6 @@
     }
 }
 
-.loader {
-    width: 75px;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-}
-
 .project-settings {
     position: absolute;
     top: 20px;
@@ -75,7 +64,6 @@
     }
     .material-icons {
         color: #909090;
-        font-size: 18px;
     }
 }
 
