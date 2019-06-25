@@ -2,35 +2,76 @@
     border: none;
     .nav-item {
         .nav-link {
-            color: black;
+            color: lightgray;
             background: white;
             border: none;
-            border-bottom: 2px solid white;
+            border-bottom: 1px solid white;
             &.active {
                 color: black;
                 background: white;
-                border-bottom: 2px solid #02c1a6;
+                font-weight: 600;
+                border-bottom: 1px solid #02c1a6;
             }
         }
         &:first-child {
             border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
         }
         &:last-child {
             border-top-right-radius: 10px;
+            border-bottom-right-radius: 10px;
         }
     }
 }
 
 .tab-content {
     min-height: 70vh;
-    background-color: white;
+    .thread {
+        border-left: 3px solid #02c1a6;
+        .date {
+            min-width: 165px;
+            position: relative;
+            .node {
+                width: 18px;
+                height: 18px;
+                background-color: #02c1a6;
+                border-radius: 50%;
+                position: absolute;
+                border: 3px solid #04a991;
+                top: 30%;
+                left: -14px;;
+            }
+        }
+        .dc-separate {
+            width: 50px;
+            height: 2px;
+            background: #02c1a6;
+        }
+    }
     .no-data {
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
         img {
-            width: 200px;
+            width: 10rem;
+        }
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .thread{
+        flex-direction: column;
+        align-items: flex-start !important;
+        .work {
+            flex-direction: column;
+            align-items: flex-start !important;
+            margin-left: 10px;
+            .dc-separate {
+                width: 2px;
+                height: 30px;
+                margin-left: 25px;
+            }
         }
     }
 }
