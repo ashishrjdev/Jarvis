@@ -78,7 +78,7 @@
                 </div>
                 <div class="tab-pane fade show active" id="nav-taskboard" role="tabpanel">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-4 mb-3">
                             <div class="task-section">
                                 <div
                                     class="ts-header p-3 bg-white d-flex align-items-center justify-content-between todo-title">
@@ -89,25 +89,17 @@
                                     </button>
                                 </div>
                                 <div droppable class="ts-content p-2">
-                                    <div draggable class="card single-task border-0 shadow-sm">
+                                    <div draggable class="card single-task border-0 shadow-sm"
+                                        *ngFor="let todo of todosList" [dragData]="todo">
                                         <div class="card-body">
-                                            <p class="card-title font-smbold">Add reminder for todos.</p>
-                                            <p class="card-text text-muted small">Feature for setting reminders to todos
-                                                so that the user can remember what to be done.</p>
-                                        </div>
-                                    </div>
-                                    <div draggable class="card single-task border-0 shadow-sm">
-                                        <div class="card-body">
-                                            <p class="card-title font-smbold">Feature to set repeated todos per
-                                                week/month.</p>
-                                            <p class="card-text text-muted small">Feature to set if a todo is repeating
-                                                per month or week.</p>
+                                            <p class="card-title font-smbold">{{ todo.title }}</p>
+                                            <p class="card-text text-muted small">{{ todo.description }}</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-4 mb-3">
                             <div class="task-section">
                                 <div
                                     class="ts-header p-3 bg-white d-flex align-items-center justify-content-between inprogress-title">
@@ -117,17 +109,18 @@
                                         <i class="material-icons">add</i>
                                     </button>
                                 </div>
-                                <div droppable class="ts-content p-2">
-                                    <div draggable class="card single-task border-0 shadow-sm">
+                                <div droppable (onDrop)="addToInProgress($event)" class="ts-content p-2">
+                                    <div draggable class="card single-task border-0 shadow-sm"
+                                        *ngFor="let inProgress of inProgressList" [dragData]="inProgress">
                                         <div class="card-body">
-                                            <p class="card-title font-smbold">Edit and delete todos.</p>
-                                            <p class="card-text text-muted small">User should be able to edit and delete todos.</p>
+                                            <p class="card-title font-smbold">{{ inProgress.title }}</p>
+                                            <p class="card-text text-muted small">{{ inProgress.description }}</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-4 mb-3">
                             <div class="task-section">
                                 <div
                                     class="ts-header p-3 bg-white d-flex align-items-center justify-content-between completed-title">
@@ -138,16 +131,11 @@
                                     </button>
                                 </div>
                                 <div droppable class="ts-content p-2">
-                                    <div draggable class="card single-task border-0 shadow-sm">
+                                    <div draggable class="card single-task border-0 shadow-sm"
+                                    *ngFor="let completed of completedList" [dragData]="completed">
                                         <div class="card-body">
-                                            <p class="card-title font-smbold text-muted "><del>Create and Save todo.</del></p>
-                                            <p class="card-text text-muted small">Feature for create and save todo.</p>
-                                        </div>
-                                    </div>
-                                    <div draggable class="card single-task border-0 shadow-sm">
-                                        <div class="card-body">
-                                            <p class="card-title font-smbold text-muted"><del>Scrollable Calendar and feature to select different dates.</del></p>
-                                            <p class="card-text text-muted small"></p>
+                                            <p class="card-title font-smbold text-muted "><del>{{ completed.title }}</del></p>
+                                            <p class="card-text text-muted small">{{ completed.description }}</p>
                                         </div>
                                     </div>
                                 </div>
