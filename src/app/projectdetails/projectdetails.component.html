@@ -8,14 +8,14 @@
         <div class="col-md-12">
             <ul class="nav nav-tabs bg-white shadow-sm">
                 <li class="nav-item p-2 bg-white">
-                    <a class="nav-link active" href="#nav-timeline" data-toggle="tab">Timeline</a>
+                    <a class="nav-link" href="#nav-timeline" data-toggle="tab">Timeline</a>
                 </li>
                 <li class="nav-item p-2 bg-white">
-                    <a class="nav-link" href="#nav-taskboard" data-toggle="tab">TaskBoard</a>
+                    <a class="nav-link  active" href="#nav-taskboard" data-toggle="tab">TasksBoard</a>
                 </li>
             </ul>
             <div class="tab-content p-3">
-                <div class="tab-pane fade show active" id="nav-timeline" role="tabpanel">
+                <div class="tab-pane fade" id="nav-timeline" role="tabpanel">
                     <div class="thread py-3 d-flex align-items-center">
                         <div class="date px-3 py-2 mx-1 bg-white shadow-sm rounded text-center">
                             June 26, 2019
@@ -24,7 +24,8 @@
                         <div class="work d-flex align-items-center">
                             <div class="dc-separate"></div>
                             <div class="content p-3 bg-white shadow-sm rounded">
-                                Create a new task : <strong>Save todos for different dates.</strong>&nbsp;&nbsp;<a href="">View task.</a>
+                                Create a new task : <strong>Save todos for different dates.</strong>&nbsp;&nbsp;<a
+                                    href="">View task.</a>
                             </div>
                         </div>
                     </div>
@@ -36,7 +37,9 @@
                         <div class="work d-flex align-items-center ">
                             <div class="dc-separate"></div>
                             <div class="content p-3 bg-white shadow-sm rounded">
-                                There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.
+                                There are many variations of passages of Lorem Ipsum available, but the majority have
+                                suffered alteration in some form, by injected humour, or randomised words which don't
+                                look even slightly believable.
                             </div>
                         </div>
                     </div>
@@ -48,7 +51,10 @@
                         <div class="work d-flex align-items-center ">
                             <div class="dc-separate"></div>
                             <div class="content p-3 bg-white shadow-sm rounded">
-                                The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
+                                The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those
+                                interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero
+                                are also reproduced in their exact original form, accompanied by English versions from
+                                the 1914 translation by H. Rackham.
                             </div>
                         </div>
                     </div>
@@ -60,7 +66,8 @@
                         <div class="work d-flex align-items-center ">
                             <div class="dc-separate"></div>
                             <div class="content p-3 bg-white shadow-sm rounded">
-                                Updated task : <strong>Save todos for different dates.</strong>&nbsp;&nbsp;<a href="">View task.</a>
+                                Updated task : <strong>Save todos for different dates.</strong>&nbsp;&nbsp;<a
+                                    href="">View task.</a>
                             </div>
                         </div>
                     </div>
@@ -69,11 +76,88 @@
                         <h5 class="text-center pt-3">No timeline to display.</h5>
                     </div> -->
                 </div>
-                <div class="tab-pane fade" id="nav-taskboard" role="tabpanel">
-                    <div class="no-data text-center">
+                <div class="tab-pane fade show active" id="nav-taskboard" role="tabpanel">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="task-section">
+                                <div
+                                    class="ts-header p-3 bg-white d-flex align-items-center justify-content-between todo-title">
+                                    <p class="font-smbold d-flex align-items-center m-0"><i
+                                            class="material-icons">assignment</i>&nbsp;&nbsp;Todo</p>
+                                    <button class="btn btn-sm btn-outline-light d-flex align-items-center">
+                                        <i class="material-icons">add</i>
+                                    </button>
+                                </div>
+                                <div droppable class="ts-content p-2">
+                                    <div draggable class="card single-task border-0 shadow-sm">
+                                        <div class="card-body">
+                                            <p class="card-title font-smbold">Add reminder for todos.</p>
+                                            <p class="card-text text-muted small">Feature for setting reminders to todos
+                                                so that the user can remember what to be done.</p>
+                                        </div>
+                                    </div>
+                                    <div draggable class="card single-task border-0 shadow-sm">
+                                        <div class="card-body">
+                                            <p class="card-title font-smbold">Feature to set repeated todos per
+                                                week/month.</p>
+                                            <p class="card-text text-muted small">Feature to set if a todo is repeating
+                                                per month or week.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="task-section">
+                                <div
+                                    class="ts-header p-3 bg-white d-flex align-items-center justify-content-between inprogress-title">
+                                    <p class="font-smbold d-flex align-items-center m-0"><i
+                                            class="material-icons">assignment_late</i>&nbsp;&nbsp;In Progress</p>
+                                    <button class="btn btn-sm btn-outline-light d-flex align-items-center">
+                                        <i class="material-icons">add</i>
+                                    </button>
+                                </div>
+                                <div droppable class="ts-content p-2">
+                                    <div draggable class="card single-task border-0 shadow-sm">
+                                        <div class="card-body">
+                                            <p class="card-title font-smbold">Edit and delete todos.</p>
+                                            <p class="card-text text-muted small">User should be able to edit and delete todos.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="task-section">
+                                <div
+                                    class="ts-header p-3 bg-white d-flex align-items-center justify-content-between completed-title">
+                                    <p class="font-smbold d-flex align-items-center m-0"><i
+                                            class="material-icons">assignment_turned_in</i>&nbsp;&nbsp;Completed</p>
+                                    <button class="btn btn-sm btn-outline-light d-flex align-items-center">
+                                        <i class="material-icons">add</i>
+                                    </button>
+                                </div>
+                                <div droppable class="ts-content p-2">
+                                    <div draggable class="card single-task border-0 shadow-sm">
+                                        <div class="card-body">
+                                            <p class="card-title font-smbold text-muted "><del>Create and Save todo.</del></p>
+                                            <p class="card-text text-muted small">Feature for create and save todo.</p>
+                                        </div>
+                                    </div>
+                                    <div draggable class="card single-task border-0 shadow-sm">
+                                        <div class="card-body">
+                                            <p class="card-title font-smbold text-muted"><del>Scrollable Calendar and feature to select different dates.</del></p>
+                                            <p class="card-text text-muted small"></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="no-data text-center">
                         <img src="assets/images/notasks.png" alt="">
                         <h5 class="text-center pt-3">Yayy! No tasks for today.</h5>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
