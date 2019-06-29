@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule }   from '@angular/forms';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
@@ -28,6 +29,7 @@ import { FilterPipe } from './shared/filter.pipe';
         AppRoutingModule,
         AngularFireModule.initializeApp(environment.firebase),
         AngularFireDatabaseModule,
+        DragDropModule
     ],
     providers: [AngularFirestore],
     bootstrap: [AppComponent]
