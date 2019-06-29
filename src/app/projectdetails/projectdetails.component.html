@@ -88,9 +88,15 @@
                                         <i class="material-icons">add</i>
                                     </button>
                                 </div>
-                                <div class="ts-content p-2">
+                                <div
+                                    cdkDropList
+                                    #todoList="cdkDropList"
+                                    [cdkDropListData]="todosList"
+                                    [cdkDropListConnectedTo]="[progressList, doneList]" 
+                                    (cdkDropListDropped)="onDrop($event)"
+                                    class="ts-content p-2">
                                     <div class="card single-task border-0 shadow-sm"
-                                        *ngFor="let todo of todosList">
+                                        *ngFor="let todo of todosList" cdkDrag>
                                         <div class="card-body">
                                             <p class="card-title font-smbold">{{ todo.title }}</p>
                                             <p class="card-text text-muted small">{{ todo.description }}</p>
@@ -109,9 +115,15 @@
                                         <i class="material-icons">add</i>
                                     </button>
                                 </div>
-                                <div class="ts-content p-2">
+                                <div 
+                                    cdkDropList
+                                    #progressList="cdkDropList"
+                                    [cdkDropListData]="inProgressList"
+                                    [cdkDropListConnectedTo]="[todoList, doneList]"
+                                    (cdkDropListDropped)="onDrop($event)"
+                                    class="ts-content p-2">
                                     <div class="card single-task border-0 shadow-sm"
-                                        *ngFor="let inProgress of inProgressList">
+                                        *ngFor="let inProgress of inProgressList" cdkDrag>
                                         <div class="card-body">
                                             <p class="card-title font-smbold">{{ inProgress.title }}</p>
                                             <p class="card-text text-muted small">{{ inProgress.description }}</p>
@@ -130,9 +142,15 @@
                                         <i class="material-icons">add</i>
                                     </button>
                                 </div>
-                                <div class="ts-content p-2">
+                                <div
+                                    cdkDropList
+                                    #doneList="cdkDropList"
+                                    [cdkDropListData]="completedList"
+                                    [cdkDropListConnectedTo]="[todoList, progressList]"
+                                    (cdkDropListDropped)="onDrop($event)"
+                                    class="ts-content p-2">
                                     <div class="card single-task border-0 shadow-sm"
-                                    *ngFor="let completed of completedList">
+                                    *ngFor="let completed of completedList" cdkDrag>
                                         <div class="card-body">
                                             <p class="card-title font-smbold text-muted "><del>{{ completed.title }}</del></p>
                                             <p class="card-text text-muted small">{{ completed.description }}</p>
