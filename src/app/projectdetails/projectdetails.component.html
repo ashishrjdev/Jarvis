@@ -88,9 +88,9 @@
                                         <i class="material-icons">add</i>
                                     </button>
                                 </div>
-                                <div droppable class="ts-content p-2">
-                                    <div draggable class="card single-task border-0 shadow-sm"
-                                        *ngFor="let todo of todosList" [dragData]="todo">
+                                <div class="ts-content p-2">
+                                    <div class="card single-task border-0 shadow-sm"
+                                        *ngFor="let todo of todosList">
                                         <div class="card-body">
                                             <p class="card-title font-smbold">{{ todo.title }}</p>
                                             <p class="card-text text-muted small">{{ todo.description }}</p>
@@ -109,9 +109,9 @@
                                         <i class="material-icons">add</i>
                                     </button>
                                 </div>
-                                <div droppable (onDrop)="addToInProgress($event)" class="ts-content p-2">
-                                    <div draggable class="card single-task border-0 shadow-sm"
-                                        *ngFor="let inProgress of inProgressList" [dragData]="inProgress">
+                                <div class="ts-content p-2">
+                                    <div class="card single-task border-0 shadow-sm"
+                                        *ngFor="let inProgress of inProgressList">
                                         <div class="card-body">
                                             <p class="card-title font-smbold">{{ inProgress.title }}</p>
                                             <p class="card-text text-muted small">{{ inProgress.description }}</p>
@@ -130,9 +130,9 @@
                                         <i class="material-icons">add</i>
                                     </button>
                                 </div>
-                                <div droppable class="ts-content p-2">
-                                    <div draggable class="card single-task border-0 shadow-sm"
-                                    *ngFor="let completed of completedList" [dragData]="completed">
+                                <div class="ts-content p-2">
+                                    <div class="card single-task border-0 shadow-sm"
+                                    *ngFor="let completed of completedList">
                                         <div class="card-body">
                                             <p class="card-title font-smbold text-muted "><del>{{ completed.title }}</del></p>
                                             <p class="card-text text-muted small">{{ completed.description }}</p>
