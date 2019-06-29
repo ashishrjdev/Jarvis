@@ -37,8 +37,4 @@ export class ProjectdetailsComponent implements OnInit {
     ngOnInit() {
     }
 
-    public addToInProgress(event: any) {
-        this.inProgressList.push(event.dragData);
-    }
-
 }
