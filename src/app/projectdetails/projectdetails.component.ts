@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { TaskService } from '../shared/services/task.service';
+import { Task } from '../shared/models/task.model';
 
 @Component({
     selector: 'app-projectdetails',
@@ -8,37 +9,16 @@ import { TaskService } from '../shared/services/task.service';
     styleUrls: ['./projectdetails.component.scss']
 })
 export class ProjectdetailsComponent implements OnInit {
-    todosList = [
-        {
-            title: 'Add reminder for todos',
-            description: 'Feature for setting reminders to todos so that the user can remember what to be done.'
-        },
-        {
-            title: 'Feature to set repeated todos per week/month',
-            description: 'Feature to set if a todo is repeating per month or week.'
-        }
-    ];
-    inProgressList = [
-        {
-            title: 'Edit and delete todos',
-            description: 'User should be able to edit and delete todos.'
-        }
-    ];
-    completedList = [
-        {
-            title: 'Create and Save todo',
-            description: 'Feature for create and save todo.'
-        },
-        {
-            title: 'Scrollable Calendar and feature to select different dates',
-            description: ''
-        }
-    ];
+    allTasks: {id: string, data: Task}[];
+    todosList: {id: string, data: Task}[];
+    inProgressList: {id: string, data: Task}[];
+    completedList: {id: string, data: Task}[];
     isEditing: boolean = false;
     selectedTask =  {title: "", description: ""};
     constructor(private taskService: TaskService) { }
 
     ngOnInit() {
+        this.getTasks();
     }
 
     onDrop(event: CdkDragDrop<{title:string, description: string}[]>) {
@@ -56,6 +36,27 @@ export class ProjectdetailsComponent implements OnInit {
                 event.currentIndex
             );
         }
+    }
+
+    public getTasks() {
+        this.taskService.getTasks().subscribe(data => {
+            this.allTasks = data.map(e => {
+                return {
+                    id: e.payload.doc.id,
+                    data: e.payload.doc.data()
+                };
+            });
+            this.todosList = this.allTasks.filter(task => {
+                return task.data.status == 'todo';
+            });
+            this.inProgressList = this.allTasks.filter(task => {
+                return task.data.status == 'inprogress';
+            });
+            this.completedList = this.allTasks.filter(task => {
+                return task.data.status == 'completed';
+            });
+            // this.isdataLoaded = true;
+        });
     }
 
     public addTask(name: string, description: string) {

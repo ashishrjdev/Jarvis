@@ -102,8 +102,8 @@
                                     <div class="card single-task border-0 shadow-sm"
                                         *ngFor="let todo of todosList" cdkDrag>
                                         <div class="card-body">
-                                            <p class="card-title font-smbold">{{ todo.title }}</p>
-                                            <p class="card-text text-muted small">{{ todo.description }}</p>
+                                            <p class="card-title font-smbold">{{ todo.data.name }}</p>
+                                            <p class="card-text text-muted small m-0">{{ todo.data.description }}</p>
                                             <div class="dropdown task-settings">
                                                 <button
                                                     class="btn dropdown-toggle d-flex align-items-center justify-content-center"
@@ -139,8 +139,9 @@
                             <div class="task-section">
                                 <div
                                     class="ts-header p-3 bg-white d-flex align-items-center justify-content-between inprogress-title">
-                                    <p class="font-smbold d-flex align-items-center m-0"><i
-                                            class="material-icons">assignment_late</i>&nbsp;&nbsp;In Progress</p>
+                                    <p class="font-smbold d-flex align-items-center m-0">
+                                        <i class="material-icons">assignment_late</i>&nbsp;&nbsp;In Progress
+                                    </p>
                                 </div>
                                 <div 
                                     cdkDropList
@@ -152,8 +153,8 @@
                                     <div class="card single-task border-0 shadow-sm"
                                         *ngFor="let inProgress of inProgressList" cdkDrag>
                                         <div class="card-body">
-                                            <p class="card-title font-smbold">{{ inProgress.title }}</p>
-                                            <p class="card-text text-muted small">{{ inProgress.description }}</p>
+                                            <p class="card-title font-smbold">{{ inProgress.data.name }}</p>
+                                            <p class="card-text text-muted small">{{ inProgress.data.description }}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -177,8 +178,8 @@
                                     <div class="card single-task border-0 shadow-sm"
                                     *ngFor="let completed of completedList" cdkDrag>
                                         <div class="card-body">
-                                            <p class="card-title font-smbold text-muted "><del>{{ completed.title }}</del></p>
-                                            <p class="card-text text-muted small">{{ completed.description }}</p>
+                                            <p class="card-title font-smbold text-muted "><del>{{ completed.data.name }}</del></p>
+                                            <p class="card-text text-muted small">{{ completed.data.description }}</p>
                                         </div>
                                     </div>
                                 </div>
