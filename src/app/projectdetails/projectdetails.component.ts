@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
+import { TaskService } from '../shared/services/task.service';
 
 @Component({
     selector: 'app-projectdetails',
@@ -33,7 +34,9 @@ export class ProjectdetailsComponent implements OnInit {
             description: ''
         }
     ];
-    constructor() { }
+    isEditing: boolean = false;
+    selectedTask =  {title: "", description: ""};
+    constructor(private taskService: TaskService) { }
 
     ngOnInit() {
     }
@@ -53,5 +56,40 @@ export class ProjectdetailsComponent implements OnInit {
                 event.currentIndex
             );
         }
+    }
+
+    public addTask(name: string, description: string) {
+        const newTask = {
+            name: name,
+            description: description,
+            status: 'todo',
+            createdAt: new Date(),
+            updatedAt: new Date(),
+            comments: [],
+        };
+        this.taskService.addTask(newTask);
+    }
+
+    public updateTask(taskId: string, updatedName: string, updatedDesc:string) {
+        // const updatedTask = {
+        //     name: updatedName,
+        //     description: updatedDesc
+        // };
+        // this.taskService.updateTask(taskId, updatedTask);
+    }
+
+    public deleteTask(taskId: string) {
+        this.taskService.deleteTask(taskId);
+    }
+
+    public onSubmit(form: HTMLFormElement) {
+        const formData = form.value;
+        // if (this.isEditing) {
+        //     this.updateProject(this.selectedPid, formData.projecttitle, formData.projectdesc);
+        // } else {
+            this.addTask(formData.tasktitle, formData.taskdesc);
+        // }
+        // this.resetDefaults();
+        form.reset();
     }
 }
