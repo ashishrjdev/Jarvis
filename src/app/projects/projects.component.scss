@@ -58,11 +58,13 @@
     top: 20px;
     right: 20px;
     .dropdown-toggle {
+        padding: 5px;
         &::after {
             display: none;
         }
     }
     .material-icons {
+        font-size: 24px;
         color: #909090;
     }
 }

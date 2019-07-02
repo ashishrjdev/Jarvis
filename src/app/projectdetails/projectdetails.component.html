@@ -82,9 +82,13 @@
                             <div class="task-section">
                                 <div
                                     class="ts-header p-3 bg-white d-flex align-items-center justify-content-between todo-title">
-                                    <p class="font-smbold d-flex align-items-center m-0"><i
-                                            class="material-icons">assignment</i>&nbsp;&nbsp;Todo</p>
-                                    <button class="btn btn-sm btn-outline-light d-flex align-items-center">
+                                    <p class="font-smbold d-flex align-items-center m-0">
+                                        <i class="material-icons">assignment</i>&nbsp;&nbsp;Todo
+                                    </p>
+                                    <button 
+                                        data-toggle="modal"
+                                        data-target="#newtask"
+                                        class="btn btn-sm btn-outline-light d-flex align-items-center">
                                         <i class="material-icons">add</i>
                                     </button>
                                 </div>
@@ -100,6 +104,32 @@
                                         <div class="card-body">
                                             <p class="card-title font-smbold">{{ todo.title }}</p>
                                             <p class="card-text text-muted small">{{ todo.description }}</p>
+                                            <div class="dropdown task-settings">
+                                                <button
+                                                    class="btn dropdown-toggle d-flex align-items-center justify-content-center"
+                                                    type="button"
+                                                    data-toggle="dropdown">
+                                                    <i class="material-icons">more_vert</i>
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-right border-0 shadow-lg mt-2 px-1">
+                                                    <button
+                                                        class="dropdown-item d-flex align-items-center py-2 rounded"
+                                                        type="button"
+                                                        data-toggle="modal"
+                                                        data-target="#newproject"
+                                                        (click)="setProject(project)">
+                                                        <i class="material-icons">edit</i>&nbsp;&nbsp;Edit
+                                                    </button>
+                                                    <button
+                                                        class="dropdown-item d-flex align-items-center py-2 rounded"
+                                                        type="button"
+                                                        data-toggle="modal"
+                                                        data-target="#delproject"
+                                                        (click)="setProject(project)">
+                                                        <i class=" material-icons">delete</i>&nbsp;&nbsp;Delete
+                                                    </button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -111,9 +141,6 @@
                                     class="ts-header p-3 bg-white d-flex align-items-center justify-content-between inprogress-title">
                                     <p class="font-smbold d-flex align-items-center m-0"><i
                                             class="material-icons">assignment_late</i>&nbsp;&nbsp;In Progress</p>
-                                    <button class="btn btn-sm btn-outline-light d-flex align-items-center">
-                                        <i class="material-icons">add</i>
-                                    </button>
                                 </div>
                                 <div 
                                     cdkDropList
@@ -136,11 +163,9 @@
                             <div class="task-section">
                                 <div
                                     class="ts-header p-3 bg-white d-flex align-items-center justify-content-between completed-title">
-                                    <p class="font-smbold d-flex align-items-center m-0"><i
-                                            class="material-icons">assignment_turned_in</i>&nbsp;&nbsp;Completed</p>
-                                    <button class="btn btn-sm btn-outline-light d-flex align-items-center">
-                                        <i class="material-icons">add</i>
-                                    </button>
+                                    <p class="font-smbold d-flex align-items-center m-0">
+                                        <i class="material-icons">assignment_turned_in</i>&nbsp;&nbsp;Completed
+                                    </p>
                                 </div>
                                 <div
                                     cdkDropList
@@ -168,4 +193,99 @@
             </div>
         </div>
     </section>
+    <div class="modal fade" id="newtask" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content p-3">
+                <form 
+                    name="form"
+                    (ngSubmit)="ctform.form.valid && onSubmit(ctform)"
+                    #ctform="ngForm">
+                    <div class="modal-header border-0">
+                        <h5 
+                            *ngIf="isEditing"
+                            class="modal-title font-smbold pb-1">
+                            Update Task
+                        </h5>
+                        <h5 
+                            *ngIf="!isEditing"
+                            class="modal-title font-smbold pb-1">
+                            Create New Task
+                        </h5>
+                        <button
+                            type="button"
+                            class="close"
+                            onclick="$('#newtask').modal('hide');"
+                            (click)="resetDefaults()"
+                            aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body py-3">
+                        <div class="form-group">
+                            <label for="tasktitle" class="font-smbold">Task Title</label>
+                            <input 
+                                type="text"
+                                class="form-control"
+                                id="tasktitle"
+                                placeholder="Your new task name"
+                                required
+                                [(ngModel)]="selectedTask.name"
+                                #tasktitle="ngModel"
+                                name="tasktitle"
+                                [ngClass]="{
+                                    'is-invalid': tasktitle.touched && !tasktitle.valid,
+                                    'is-valid': tasktitle.touched && tasktitle.valid
+                                }"/>
+                            <div *ngIf="tasktitle.touched && tasktitle.valid" class="valid-feedback">
+                                Nice!
+                            </div>
+                            <div *ngIf="tasktitle.touched && !tasktitle.valid" class="invalid-feedback">
+                                Please enter task title.
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="taskdesc" class="font-smbold">Task Description</label>
+                            <textarea
+                                class="form-control"
+                                id="taskdesc"
+                                rows="5"
+                                placeholder="Tell us something about the task in detail"
+                                required
+                                [(ngModel)]="selectedTask.description"
+                                #taskdesc="ngModel"
+                                name="taskdesc"
+                                [ngClass]="{
+                                    'is-invalid': taskdesc.touched && !taskdesc.valid,
+                                    'is-valid': taskdesc.touched && taskdesc.valid
+                                }"></textarea>
+                            <div *ngIf="taskdesc.touched && taskdesc.valid" class="valid-feedback">
+                                Looks Good!
+                            </div>
+                            <div *ngIf="taskdesc.touched && !taskdesc.valid" class="invalid-feedback">
+                                Please enter task description.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer border-0">
+                        <button
+                            *ngIf="isEditing"
+                            type="submit"
+                            class="btn btn-primary"
+                            [disabled]="!ctform.valid"
+                            onclick="$('#newtask').modal('hide');">
+                            Update Task
+                        </button>
+                        <button
+                            *ngIf="!isEditing"
+                            type="submit"
+                            class="btn btn-primary"
+                            [disabled]="!ctform.valid"
+                            onclick="$('#newtask').modal('hide');">
+                            Create Task
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </main>
