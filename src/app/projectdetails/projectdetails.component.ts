@@ -37,6 +37,9 @@ export class ProjectdetailsComponent implements OnInit {
                 event.previousIndex,
                 event.currentIndex
             );
+            this.updateTaskStatus(this.todosList, 'todo');
+            this.updateTaskStatus(this.inProgressList, 'inprogress');
+            this.updateTaskStatus(this.completedList, 'completed');
         }
     }
 
@@ -79,15 +82,7 @@ export class ProjectdetailsComponent implements OnInit {
         this.isEditing = true;
     }
 
-    public updateTask(taskId: string, updatedName: string, updatedDesc:string) {
-        const updatedTask = {
-            name: updatedName,
-            description: updatedDesc,
-            status: this.selectedTask.status,
-            createdAt: this.selectedTask.createdAt,
-            updatedAt: new Date(),
-            comments: [],
-        };
+    public updateTask(taskId: string, updatedTask: Task) {
         this.taskService.updateTask(taskId, updatedTask);
     }
 
@@ -104,11 +99,30 @@ export class ProjectdetailsComponent implements OnInit {
     public onSubmit(form: HTMLFormElement) {
         const formData = form.value;
         if (this.isEditing) {
-            this.updateTask(this.selectedTid, formData.tasktitle, formData.taskdesc);
+            const updatedTask = {
+                name: formData.tasktitle,
+                description: formData.taskdesc,
+                status: this.selectedTask.status,
+                createdAt: this.selectedTask.createdAt,
+                updatedAt: new Date(),
+                comments: [],
+            };
+            this.updateTask(this.selectedTid, updatedTask);
         } else {
             this.addTask(formData.tasktitle, formData.taskdesc);
         }
         this.resetDefaults();
         form.reset();
+    }
+
+    public updateTaskStatus(tasksList:any[], status: string) {
+        tasksList.forEach(element => {
+            let task = element.data;
+            if (task.status !== status) {
+                task.status = status;
+                task.updatedAt = new Date();
+                this.updateTask(element.id, task);
+            }
+        });
     }
 }
