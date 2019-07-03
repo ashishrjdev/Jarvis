@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { TaskService } from '../shared/services/task.service';
+import { Task } from '../shared/models/task.model';
 
 @Component({
     selector: 'app-projectdetails',
@@ -8,37 +9,18 @@ import { TaskService } from '../shared/services/task.service';
     styleUrls: ['./projectdetails.component.scss']
 })
 export class ProjectdetailsComponent implements OnInit {
-    todosList = [
-        {
-            title: 'Add reminder for todos',
-            description: 'Feature for setting reminders to todos so that the user can remember what to be done.'
-        },
-        {
-            title: 'Feature to set repeated todos per week/month',
-            description: 'Feature to set if a todo is repeating per month or week.'
-        }
-    ];
-    inProgressList = [
-        {
-            title: 'Edit and delete todos',
-            description: 'User should be able to edit and delete todos.'
-        }
-    ];
-    completedList = [
-        {
-            title: 'Create and Save todo',
-            description: 'Feature for create and save todo.'
-        },
-        {
-            title: 'Scrollable Calendar and feature to select different dates',
-            description: ''
-        }
-    ];
+    allTasks: {id: string, data: Task}[];
+    todosList: {id: string, data: Task}[];
+    inProgressList: {id: string, data: Task}[];
+    completedList: {id: string, data: Task}[];
     isEditing: boolean = false;
-    selectedTask =  {title: "", description: ""};
+    selectedTask: Task = new Task();
+    selectedTid: string;
+
     constructor(private taskService: TaskService) { }
 
     ngOnInit() {
+        this.getTasks();
     }
 
     onDrop(event: CdkDragDrop<{title:string, description: string}[]>) {
@@ -58,6 +40,27 @@ export class ProjectdetailsComponent implements OnInit {
         }
     }
 
+    public getTasks() {
+        this.taskService.getTasks().subscribe(data => {
+            this.allTasks = data.map(e => {
+                return {
+                    id: e.payload.doc.id,
+                    data: e.payload.doc.data()
+                };
+            });
+            this.todosList = this.allTasks.filter(task => {
+                return task.data.status == 'todo';
+            });
+            this.inProgressList = this.allTasks.filter(task => {
+                return task.data.status == 'inprogress';
+            });
+            this.completedList = this.allTasks.filter(task => {
+                return task.data.status == 'completed';
+            });
+            // this.isdataLoaded = true;
+        });
+    }
+
     public addTask(name: string, description: string) {
         const newTask = {
             name: name,
@@ -70,12 +73,28 @@ export class ProjectdetailsComponent implements OnInit {
         this.taskService.addTask(newTask);
     }
 
+    public setTask(task: any) {
+        this.selectedTid = task.id;
+        this.selectedTask = task.data;
+        this.isEditing = true;
+    }
+
     public updateTask(taskId: string, updatedName: string, updatedDesc:string) {
-        // const updatedTask = {
-        //     name: updatedName,
-        //     description: updatedDesc
-        // };
-        // this.taskService.updateTask(taskId, updatedTask);
+        const updatedTask = {
+            name: updatedName,
+            description: updatedDesc,
+            status: this.selectedTask.status,
+            createdAt: this.selectedTask.createdAt,
+            updatedAt: new Date(),
+            comments: [],
+        };
+        this.taskService.updateTask(taskId, updatedTask);
+    }
+
+    public resetDefaults() {
+        this.isEditing = false;
+        this.selectedTid = "";
+        this.selectedTask = new Task();
     }
 
     public deleteTask(taskId: string) {
@@ -84,12 +103,12 @@ export class ProjectdetailsComponent implements OnInit {
 
     public onSubmit(form: HTMLFormElement) {
         const formData = form.value;
-        // if (this.isEditing) {
-        //     this.updateProject(this.selectedPid, formData.projecttitle, formData.projectdesc);
-        // } else {
+        if (this.isEditing) {
+            this.updateTask(this.selectedTid, formData.tasktitle, formData.taskdesc);
+        } else {
             this.addTask(formData.tasktitle, formData.taskdesc);
-        // }
-        // this.resetDefaults();
+        }
+        this.resetDefaults();
         form.reset();
     }
 }

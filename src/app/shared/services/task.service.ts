@@ -22,10 +22,10 @@ export class TaskService {
     }
 
     public updateTask(taskId: string, updatedTask: Task) {
-        this.db.doc('projects/' + taskId).update(updatedTask);
+        this.db.doc('tasks/' + taskId).update(updatedTask);
     }
 
     public deleteTask(taskId: string) {
-        this.db.doc('projects/' + taskId).delete();
+        this.db.doc('tasks/' + taskId).delete();
     }
 }

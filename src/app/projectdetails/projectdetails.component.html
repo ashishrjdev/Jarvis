@@ -102,8 +102,8 @@
                                     <div class="card single-task border-0 shadow-sm"
                                         *ngFor="let todo of todosList" cdkDrag>
                                         <div class="card-body">
-                                            <p class="card-title font-smbold">{{ todo.title }}</p>
-                                            <p class="card-text text-muted small">{{ todo.description }}</p>
+                                            <p class="card-title font-smbold">{{ todo.data.name }}</p>
+                                            <p class="card-text text-muted small m-0">{{ todo.data.description }}</p>
                                             <div class="dropdown task-settings">
                                                 <button
                                                     class="btn dropdown-toggle d-flex align-items-center justify-content-center"
@@ -116,16 +116,16 @@
                                                         class="dropdown-item d-flex align-items-center py-2 rounded"
                                                         type="button"
                                                         data-toggle="modal"
-                                                        data-target="#newproject"
-                                                        (click)="setProject(project)">
+                                                        data-target="#newtask"
+                                                        (click)="setTask(todo)">
                                                         <i class="material-icons">edit</i>&nbsp;&nbsp;Edit
                                                     </button>
                                                     <button
                                                         class="dropdown-item d-flex align-items-center py-2 rounded"
                                                         type="button"
                                                         data-toggle="modal"
-                                                        data-target="#delproject"
-                                                        (click)="setProject(project)">
+                                                        data-target="#deltask"
+                                                        (click)="setTask(todo)">
                                                         <i class=" material-icons">delete</i>&nbsp;&nbsp;Delete
                                                     </button>
                                                 </div>
@@ -139,8 +139,9 @@
                             <div class="task-section">
                                 <div
                                     class="ts-header p-3 bg-white d-flex align-items-center justify-content-between inprogress-title">
-                                    <p class="font-smbold d-flex align-items-center m-0"><i
-                                            class="material-icons">assignment_late</i>&nbsp;&nbsp;In Progress</p>
+                                    <p class="font-smbold d-flex align-items-center m-0">
+                                        <i class="material-icons">assignment_late</i>&nbsp;&nbsp;In Progress
+                                    </p>
                                 </div>
                                 <div 
                                     cdkDropList
@@ -152,8 +153,8 @@
                                     <div class="card single-task border-0 shadow-sm"
                                         *ngFor="let inProgress of inProgressList" cdkDrag>
                                         <div class="card-body">
-                                            <p class="card-title font-smbold">{{ inProgress.title }}</p>
-                                            <p class="card-text text-muted small">{{ inProgress.description }}</p>
+                                            <p class="card-title font-smbold">{{ inProgress.data.name }}</p>
+                                            <p class="card-text text-muted small">{{ inProgress.data.description }}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -177,8 +178,8 @@
                                     <div class="card single-task border-0 shadow-sm"
                                     *ngFor="let completed of completedList" cdkDrag>
                                         <div class="card-body">
-                                            <p class="card-title font-smbold text-muted "><del>{{ completed.title }}</del></p>
-                                            <p class="card-text text-muted small">{{ completed.description }}</p>
+                                            <p class="card-title font-smbold text-muted "><del>{{ completed.data.name }}</del></p>
+                                            <p class="card-text text-muted small">{{ completed.data.description }}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -193,6 +194,8 @@
             </div>
         </div>
     </section>
+    
+    <!-- Add and Update task modal -->
     <div class="modal fade" id="newtask" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content p-3">
@@ -285,6 +288,32 @@
                         </button>
                     </div>
                 </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete confirmation modal -->
+    <div class="modal fade" id="deltask" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content p-3">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title font-smbold pb-1">Delete Task</h5>
+                    <button
+                        type="button"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body py-3">
+                    <p>Are you sure you want to <strong>delete</strong> the <strong>task</strong>?</p>
+                    <p>This will <strong>permanently remove</strong> all the <strong>data</strong> related to task.</p>
+                </div>
+                <div class="modal-footer border-0">
+                    <button class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button class="btn btn-danger" data-dismiss="modal" (click)="deleteTask(selectedTid)">Delete</button>
+                </div>
             </div>
         </div>
     </div>

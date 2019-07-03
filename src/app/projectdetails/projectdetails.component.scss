@@ -119,6 +119,20 @@
     }
 }
 
+#newtask, #deltask {
+    .modal-header {
+        .modal-title {
+            border-bottom: 2px solid #02c1a6;
+        }
+        button.close {
+            &:focus {
+                box-shadow: none;
+                outline: none;
+            } 
+        }
+    }
+}
+
 /* Animate items as they're being sorted. */
 .cdk-drop-list-dragging .cdk-drag {
     transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
