@@ -14,7 +14,9 @@ export class ProjectdetailsComponent implements OnInit {
     inProgressList: {id: string, data: Task}[];
     completedList: {id: string, data: Task}[];
     isEditing: boolean = false;
-    selectedTask =  {title: "", description: ""};
+    selectedTask: Task = new Task();
+    selectedTid: string;
+
     constructor(private taskService: TaskService) { }
 
     ngOnInit() {
@@ -71,12 +73,28 @@ export class ProjectdetailsComponent implements OnInit {
         this.taskService.addTask(newTask);
     }
 
+    public setTask(task: any) {
+        this.selectedTid = task.id;
+        this.selectedTask = task.data;
+        this.isEditing = true;
+    }
+
     public updateTask(taskId: string, updatedName: string, updatedDesc:string) {
-        // const updatedTask = {
-        //     name: updatedName,
-        //     description: updatedDesc
-        // };
-        // this.taskService.updateTask(taskId, updatedTask);
+        const updatedTask = {
+            name: updatedName,
+            description: updatedDesc,
+            status: this.selectedTask.status,
+            createdAt: this.selectedTask.createdAt,
+            updatedAt: new Date(),
+            comments: [],
+        };
+        this.taskService.updateTask(taskId, updatedTask);
+    }
+
+    public resetDefaults() {
+        this.isEditing = false;
+        this.selectedTid = "";
+        this.selectedTask = new Task();
     }
 
     public deleteTask(taskId: string) {
@@ -85,12 +103,12 @@ export class ProjectdetailsComponent implements OnInit {
 
     public onSubmit(form: HTMLFormElement) {
         const formData = form.value;
-        // if (this.isEditing) {
-        //     this.updateProject(this.selectedPid, formData.projecttitle, formData.projectdesc);
-        // } else {
+        if (this.isEditing) {
+            this.updateTask(this.selectedTid, formData.tasktitle, formData.taskdesc);
+        } else {
             this.addTask(formData.tasktitle, formData.taskdesc);
-        // }
-        // this.resetDefaults();
+        }
+        this.resetDefaults();
         form.reset();
     }
 }
