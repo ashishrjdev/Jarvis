@@ -125,4 +125,13 @@ export class ProjectdetailsComponent implements OnInit {
             }
         });
     }
+
+    public onAddComment(form: HTMLFormElement) {
+        const formData = form.value;
+        this.selectedTask.comments.push({
+            comment : formData.comment,
+            createdAt : new Date() 
+        });
+        this.updateTask(this.selectedTid, this.selectedTask);
+    }
 }

@@ -104,6 +104,13 @@
                                         <div class="card-body">
                                             <p class="card-title font-smbold">{{ todo.data.name }}</p>
                                             <p class="card-text text-muted small m-0">{{ todo.data.description }}</p>
+                                            <p
+                                                class="card-text m-0 comment-link text-primary"
+                                                data-toggle="modal"
+                                                data-target="#commenttask"
+                                                (click)="setTask(todo)">
+                                                <strong>4</strong> comments
+                                            </p>
                                             <div class="dropdown task-settings">
                                                 <button
                                                     class="btn dropdown-toggle d-flex align-items-center justify-content-center"
@@ -155,6 +162,32 @@
                                         <div class="card-body">
                                             <p class="card-title font-smbold">{{ inProgress.data.name }}</p>
                                             <p class="card-text text-muted small">{{ inProgress.data.description }}</p>
+                                            <div class="dropdown task-settings">
+                                                <button
+                                                    class="btn dropdown-toggle d-flex align-items-center justify-content-center"
+                                                    type="button"
+                                                    data-toggle="dropdown">
+                                                    <i class="material-icons">more_vert</i>
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-right border-0 shadow-lg mt-2 px-1">
+                                                    <button
+                                                        class="dropdown-item d-flex align-items-center py-2 rounded"
+                                                        type="button"
+                                                        data-toggle="modal"
+                                                        data-target="#newtask"
+                                                        (click)="setTask(inProgress)">
+                                                        <i class="material-icons">edit</i>&nbsp;&nbsp;Edit
+                                                    </button>
+                                                    <button
+                                                        class="dropdown-item d-flex align-items-center py-2 rounded"
+                                                        type="button"
+                                                        data-toggle="modal"
+                                                        data-target="#deltask"
+                                                        (click)="setTask(inProgress)">
+                                                        <i class=" material-icons">delete</i>&nbsp;&nbsp;Delete
+                                                    </button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -180,6 +213,32 @@
                                         <div class="card-body">
                                             <p class="card-title font-smbold text-muted "><del>{{ completed.data.name }}</del></p>
                                             <p class="card-text text-muted small">{{ completed.data.description }}</p>
+                                            <div class="dropdown task-settings">
+                                                <button
+                                                    class="btn dropdown-toggle d-flex align-items-center justify-content-center"
+                                                    type="button"
+                                                    data-toggle="dropdown">
+                                                    <i class="material-icons">more_vert</i>
+                                                </button>
+                                                <div class="dropdown-menu dropdown-menu-right border-0 shadow-lg mt-2 px-1">
+                                                    <button
+                                                        class="dropdown-item d-flex align-items-center py-2 rounded"
+                                                        type="button"
+                                                        data-toggle="modal"
+                                                        data-target="#newtask"
+                                                        (click)="setTask(completed)">
+                                                        <i class="material-icons">edit</i>&nbsp;&nbsp;Edit
+                                                    </button>
+                                                    <button
+                                                        class="dropdown-item d-flex align-items-center py-2 rounded"
+                                                        type="button"
+                                                        data-toggle="modal"
+                                                        data-target="#deltask"
+                                                        (click)="setTask(completed)">
+                                                        <i class=" material-icons">delete</i>&nbsp;&nbsp;Delete
+                                                    </button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -314,6 +373,60 @@
                     <button class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                     <button class="btn btn-danger" data-dismiss="modal" (click)="deleteTask(selectedTid)">Delete</button>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="commenttask" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content p-3">
+                <form 
+                    name="form"
+                    (ngSubmit)="comform.form.valid && onAddComment(comform)"
+                    #comform="ngForm">
+                    <div class="modal-header border-0">
+                        <h5 class="modal-title font-smbold pb-1">{{ selectedTask.name }}</h5>
+                        <button
+                            type="button"
+                            class="close"
+                            data-dismiss="modal"
+                            aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body py-3">
+                        <p>{{ selectedTask.description }}</p>
+                        <textarea
+                            class="form-control"
+                            id="comment"
+                            rows="5"
+                            placeholder="What have you done today ?"
+                            required
+                            ngModel
+                            #comment="ngModel"
+                            name="comment"
+                            [ngClass]="{
+                                'is-invalid': comment.touched && !comment.valid,
+                                'is-valid': comment.touched && comment.valid
+                            }">
+                        </textarea>
+                        <div *ngIf="comment.touched && comment.valid" class="valid-feedback">
+                            Looks Good!
+                        </div>
+                        <div *ngIf="comment.touched && !comment.valid" class="invalid-feedback">
+                            Please enter some comment on the task.
+                        </div>
+                    </div>
+                    <div class="modal-footer border-0">
+                        <button
+                            class="btn btn-primary"
+                            type="submit"
+                            [disabled]="!comform.valid"
+                            onclick="$('#commenttask').modal('hide');">
+                            Add Comment
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
